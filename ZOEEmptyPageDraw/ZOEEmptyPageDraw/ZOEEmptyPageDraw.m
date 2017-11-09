@@ -73,9 +73,6 @@
     if (![ZOEEmptyPageDraw isBlankString:message]) {
         [view addSubview:self.messageBtn];
         [self.messageBtn setTitle:message forState:UIControlStateNormal];
-        if (_MyBlock) {
-            _MyBlock(_messageBtn);
-        }
     }
     [self configFrame];
 }
@@ -92,6 +89,9 @@
                                         50*_scale);
     messageBtnFrame.origin.y = messageBtnFrame.origin.y?messageBtnFrame.origin.y:(_originY+_bgMessageOffset);
     _messageBtn.frame = messageBtnFrame;
+    if (_MyBlock) {
+        _MyBlock(_messageBtn);
+    }
 }
 
 - (void)removeBGMessage {
