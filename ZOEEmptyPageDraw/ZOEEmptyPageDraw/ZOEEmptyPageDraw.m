@@ -74,11 +74,11 @@
         [view addSubview:self.messageBtn];
         [self.messageBtn setTitle:message forState:UIControlStateNormal];
     }
-    [self configFrame];
+    [self configFrame:view];
 }
 
-- (void)configFrame {
-    _imageView.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width-_imageView.image.size.width*_scale)/2.0,
+- (void)configFrame:(UIView *)view {
+    _imageView.frame = CGRectMake((view.frame.size.width-_imageView.image.size.width*_scale)/2.0,
                                   _originY?_originY:(100*_scale+_bgMessageOffset+_originY),
                                   _imageView.image.size.width*_scale,
                                   _imageView.image.size.height*_scale);
