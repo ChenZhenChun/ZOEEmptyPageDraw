@@ -17,8 +17,6 @@
 @property (nonatomic,strong) UIButton        *messageBtn;
 @property (nonatomic,copy)   void(^MyBlock)(UIButton *messageBtn);
 @property (nonatomic,copy)   void(^MyClickBlock)(UIButton *messageBtn);
-@property (nonatomic,assign) CGFloat         scale;//屏幕比例
-
 @end
 
 @implementation ZOEEmptyPageDraw
@@ -78,15 +76,15 @@
 }
 
 - (void)configFrame:(UIView *)view {
-    _imageView.frame = CGRectMake((view.frame.size.width-_imageView.image.size.width*_scale)/2.0,
-                                  _originY?_originY:(100*_scale+_bgMessageOffset+_originY),
-                                  _imageView.image.size.width*_scale,
-                                  _imageView.image.size.height*_scale);
+    _imageView.frame = CGRectMake((view.frame.size.width-_imageView.image.size.width)/2.0,
+                                  _originY?_originY:(100+_bgMessageOffset+_originY),
+                                  _imageView.image.size.width,
+                                  _imageView.image.size.height);
     
     CGRect messageBtnFrame = CGRectMake(0,
                                         CGRectGetMaxY(_imageView.frame),
-                                        [UIScreen mainScreen].bounds.size.width,
-                                        50*_scale);
+                                        view.frame.size.width,
+                                        50);
     messageBtnFrame.origin.y = messageBtnFrame.origin.y?messageBtnFrame.origin.y:(_originY+_bgMessageOffset);
     _messageBtn.frame = messageBtnFrame;
     if (_MyBlock) {
@@ -131,7 +129,7 @@
         _messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _messageBtn.backgroundColor = [UIColor clearColor];
         [_messageBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        _messageBtn.titleLabel.font = [UIFont systemFontOfSize:17*_scale];
+        _messageBtn.titleLabel.font = [UIFont systemFontOfSize:17];
         _messageBtn.adjustsImageWhenHighlighted = NO;
         [_messageBtn addTarget:self action:@selector(clickMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -150,21 +148,6 @@
         return YES;
     }
     return NO;
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self scale];
-    }
-    return self;
-}
-
-- (CGFloat)scale {
-    if (_scale == 0) {
-        _scale = ([UIScreen mainScreen].bounds.size.height>480?[UIScreen mainScreen].bounds.size.height/667.0:0.851574);
-    }
-    return _scale;
 }
 
 @end
