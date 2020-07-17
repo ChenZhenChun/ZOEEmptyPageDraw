@@ -136,6 +136,25 @@
     return _messageBtn;
 }
 
+- (void)resetImage:(UIImage *)image {
+    //设置图片
+    if (image) {
+        self.imageView.image = image;
+        UIView *view = [self.imageView superview];
+        _imageView.frame = CGRectMake((view.frame.size.width-_imageView.image.size.width)/2.0,
+                                      _originY?_originY:(100+_bgMessageOffset+_originY),
+                                      _imageView.image.size.width,
+                                      _imageView.image.size.height);
+        
+        CGRect messageBtnFrame = CGRectMake(0,
+                                            CGRectGetMaxY(_imageView.frame),
+                                            view.frame.size.width,
+                                            50);
+        messageBtnFrame.origin.y = messageBtnFrame.origin.y?messageBtnFrame.origin.y:(_originY+_bgMessageOffset);
+        _messageBtn.frame = messageBtnFrame;
+    }
+}
+
 #pragma mark - 判断是否为空
 + (BOOL) isBlankString:(NSString *)string {
     if (string == nil || string == NULL) {

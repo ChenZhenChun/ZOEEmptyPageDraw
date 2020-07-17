@@ -75,6 +75,10 @@
   responseMessageBtn:(void (^)(UIButton *))messageBtnBlock
      clickMessageBtn:(void (^)(UIButton *))clickMessageBtnBlock;
 
+/// 重置image
+/// @param image image description
+- (void)resetImage:(UIImage *)image;
+
 /**
  移除空白页提示
  */
