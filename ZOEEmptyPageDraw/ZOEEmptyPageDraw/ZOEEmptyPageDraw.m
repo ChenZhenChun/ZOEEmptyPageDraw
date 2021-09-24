@@ -64,7 +64,7 @@
     //设置图片
     if (![ZOEEmptyPageDraw isBlankString:imageName]) {
         [view addSubview:self.imageView];
-        UIImage *image = [UIImage imageNamed:imageName];
+        UIImage *image = [UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
         self.imageView.image = image;
     }
     //设置文本
